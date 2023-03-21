@@ -8,7 +8,7 @@ import Typography from "@mui/material/Typography";
 
 
 
-function WorkoutCard() {
+function WorkoutCard({ workOuts}) {
  
  
  

@@ -16,14 +16,14 @@ function App() {
   
   useEffect(() => {
     getExercises();
-    getWorkOuts();
+    // getWorkOuts();
+    console.log('useeffect workout invocation')
   }, []); 
   
 
-  const handleSubmit = (event) => {
+  const handleClick = (event) => {
     event.preventDefault();
     getWorkOuts(bodyPart,muscleType)
-    console.log(workOuts)
 }
 
 
@@ -32,7 +32,7 @@ function App() {
     const options = {
       method: "GET",
       headers: {
-        "X-RapidAPI-Key": "cb7146dee1mshad319cacdd23b3fp176872jsn034168aaf571",
+        "X-RapidAPI-Key": "1612d92675msh4d77137027a4557p148afdjsna32764f0c32f",
         "X-RapidAPI-Host": "exercisedb.p.rapidapi.com",
       },
     };
@@ -58,16 +58,16 @@ function App() {
   const options = {
     method: "GET",
     headers: {
-      "X-RapidAPI-Key": "cb7146dee1mshad319cacdd23b3fp176872jsn034168aaf571",
+      "X-RapidAPI-Key": "1612d92675msh4d77137027a4557p148afdjsna32764f0c32f",
       "X-RapidAPI-Host": "exercisedb.p.rapidapi.com",
     },
   };
 
   
-  fetch(`https://exercisedb.p.rapidapi.com/exercises?bodyPart=${bodyPart}&target=${muscleType}`, options)
+  fetch(`https://exercisedb.p.rapidapi.com/exercises/bodyPart/${bodyPart}`, options)
       .then((response) => response.json())
       .then((response) => {
-      console.log(response)
+      console.log('this is the data', response)
       setWorkOuts(response) 
       })
     }
@@ -80,11 +80,12 @@ function App() {
           <Stack spacing={1}>
             <UserInput className="BP" bodyPartDD={bodyPartDD} setBodyPart={setBodyPart} bodyPart={bodyPart} label='Body Part'/>
             <UserInput className="MT" bodyPartDD={muscleTypeDD} setBodyPart={setMuscleType} bodyPart={muscleType} label='Muscle Type'/>
-            <Button variant="contained" onSubmit={handleSubmit}>Generate Workouts</Button>
+            <Button variant="contained" onClick={handleClick}>Generate Workouts</Button>
           </Stack>
         </Paper>
       </Container>
-      <WorkoutCard/>
+      <WorkoutCard
+      workOuts={workOuts}/>
     </div>
   );
 }
