@@ -3,6 +3,7 @@ import "./App.css";
 import Header from "./component/Header";
 import UserInput from "./component/UserInput";
 import { Button, Container, Paper, Stack } from "@mui/material";
+import WorkoutCard from "./component/WorkoutCard";
 
 function App() {
   // DD means DropDown
@@ -10,11 +11,22 @@ function App() {
   const [bodyPartDD, setBodyPartDD] = useState(new Set()),
     [muscleTypeDD, setMuscleTypeDD] = useState(new Set()),
     [bodyPart, setBodyPart] = useState(''),
-    [muscleType, setMuscleType] = useState('')
-
+    [muscleType, setMuscleType] = useState(''),
+    [workOuts, setWorkOuts] = useState([])
+  
   useEffect(() => {
     getExercises();
-  }, []);
+    getWorkOuts();
+  }, []); 
+  
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    getWorkOuts(bodyPart,muscleType)
+    console.log(workOuts)
+}
+
+
 
   function getExercises() {
     const options = {
@@ -28,6 +40,7 @@ function App() {
     fetch("https://exercisedb.p.rapidapi.com/exercises", options)
       .then((response) => response.json())
       .then((response) => {
+      setWorkOuts(response)
         for (let i = 0; i < response.length; i++) {
           let currentItem = response[i];
           bodyPartDD.add(currentItem.bodyPart);
@@ -39,8 +52,26 @@ function App() {
       })
       .catch((err) => console.error(err));
   }
+  function getWorkOuts () {
 
-  // console.log(muscleTypeDD);
+  
+  const options = {
+    method: "GET",
+    headers: {
+      "X-RapidAPI-Key": "cb7146dee1mshad319cacdd23b3fp176872jsn034168aaf571",
+      "X-RapidAPI-Host": "exercisedb.p.rapidapi.com",
+    },
+  };
+
+  
+  fetch(`https://exercisedb.p.rapidapi.com/exercises?bodyPart=${bodyPart}&target=${muscleType}`, options)
+      .then((response) => response.json())
+      .then((response) => {
+      console.log(response)
+      setWorkOuts(response) 
+      })
+    }
+  
   return (
     <div className='App'>
       <Header />
@@ -49,10 +80,11 @@ function App() {
           <Stack spacing={1}>
             <UserInput className="BP" bodyPartDD={bodyPartDD} setBodyPart={setBodyPart} bodyPart={bodyPart} label='Body Part'/>
             <UserInput className="MT" bodyPartDD={muscleTypeDD} setBodyPart={setMuscleType} bodyPart={muscleType} label='Muscle Type'/>
-            <Button variant="contained">Generate Workouts</Button>
+            <Button variant="contained" onSubmit={handleSubmit}>Generate Workouts</Button>
           </Stack>
         </Paper>
       </Container>
+      <WorkoutCard/>
     </div>
   );
 }
