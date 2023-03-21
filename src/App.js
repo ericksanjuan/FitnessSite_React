@@ -7,12 +7,12 @@ import WorkoutCard from "./component/WorkoutCard";
 
 function App() {
   // DD means DropDown
-
   const [bodyPartDD, setBodyPartDD] = useState(new Set()),
     [muscleTypeDD, setMuscleTypeDD] = useState(new Set()),
     [bodyPart, setBodyPart] = useState(''),
     [muscleType, setMuscleType] = useState(''),
-    [workOuts, setWorkOuts] = useState([])
+    [workOuts, setWorkOuts] = useState([]),
+    [workOutCard, setWorkOutCard] = useState([])
 
   useEffect(() => {
     getExercises();
@@ -48,25 +48,18 @@ function App() {
       .catch((err) => console.error(err));
   }
   function getWorkOuts(bodyPart, muscleType) {
-
-    setWorkOuts(workOuts.filter(exercise => exercise.bodyPart === bodyPart && exercise.target === muscleType));
-    console.log('new state after filter', workOuts);
-
-    // const options = {
-    //   method: "GET",
-    //   headers: {
-    //     "X-RapidAPI-Key": "1612d92675msh4d77137027a4557p148afdjsna32764f0c32f",
-    //     "X-RapidAPI-Host": "exercisedb.p.rapidapi.com",
-    //   },
-    // };
-
-
-    // fetch(`https://exercisedb.p.rapidapi.com/exercises/bodyPart/${bodyPart}`, options)
-    //     .then((response) => response.json())
-    //     .then((response) => {
-    //     console.log('this is the data', response)
-    //     setWorkOuts(response) 
-    //     })
+    const filteredWorkOuts = workOuts.filter(
+      exercise => exercise.bodyPart === bodyPart && exercise.target === muscleType
+    );
+    if (filteredWorkOuts.length > 0) {
+      setWorkOutCard(filteredWorkOuts);
+    } else {
+      setWorkOutCard(
+        workOuts.filter(
+          exercise => exercise.bodyPart === bodyPart || exercise.target === muscleType
+        )
+      );
+    }
   }
 
   return (
@@ -81,8 +74,7 @@ function App() {
           </Stack>
         </Paper>
       </Container>
-      <WorkoutCard
-        workOuts={workOuts} />
+      <WorkoutCard workOutCard={workOutCard} />
     </div>
   );
 }

@@ -8,34 +8,30 @@ import Typography from "@mui/material/Typography";
 
 
 
-function WorkoutCard({ workOuts}) {
- 
- 
- 
-  
- 
- 
-    return (
-    <Card sx={{ maxWidth: 345 }}>
-      <CardMedia
-        sx={{ height: 140 }}
-        image="/static/images/cards/contemplative-reptile.jpg"
-        title="green iguana"
-      />
-      <CardContent>
-        <Typography gutterBottom variant="h5" component="div">
-          Lizard
-        </Typography>
-        <Typography variant="body2" color="text.secondary">
-          Lizards are a widespread group of squamate reptiles, with over 6,000
-          species, ranging across all continents except Antarctica
-        </Typography>
-      </CardContent>
-      <CardActions>
-        <Button size="small">Share</Button>
-        <Button size="small">Learn More</Button>
-      </CardActions>
-    </Card>
+function WorkoutCard({ workOutCard }) {
+  console.log('card data:', workOutCard)
+  return (
+    workOutCard.map((workout) => (
+      <Card sx={{ maxWidth: 345 }} key={workout.id}>
+        <CardMedia
+          sx={{ height: 140 }}
+          image={workout.gifUrl}
+          title={workout.name}
+        />
+        <CardContent>
+          <Typography gutterBottom variant="h5" component="div">
+            {workout.name}
+          </Typography>
+          <Typography variant="body2" color="text.secondary">
+            {workout.bodyPart}
+          </Typography>
+        </CardContent>
+        <CardActions>
+          <Button size="small">Share</Button>
+          <Button size="small">Learn More</Button>
+        </CardActions>
+      </Card>
+    ))
   );
 }
 
