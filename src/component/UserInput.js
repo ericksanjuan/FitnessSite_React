@@ -5,9 +5,8 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 
-function UserInput({bodyPartDD, setBodyPart, bodyPart, label}) {
-  
-// there was a typo here that I also corrected on setBodyPart(we had it originally as setBodyParts)
+function UserInput({ bodyPartDD, setBodyPart, bodyPart, label }) {
+
   const handleChange = (event) => {
     setBodyPart(event.target.value);
   };
@@ -19,17 +18,15 @@ function UserInput({bodyPartDD, setBodyPart, bodyPart, label}) {
         <Select
           labelId="bodyPart"
           id="bodyPart"
-          value= {bodyPart}
-          label="Body Part"
+          value={bodyPart}
+          label="bodyPart"
           onChange={handleChange}
-        >  
-         {/* {renderMenuItems}
-          <MenuItem value={bodyPartDD[0]}>Waist</MenuItem> */}
-          {[...bodyPartDD].map((value) => <MenuItem key={value} value={value}>{value}</MenuItem> )}
+        >
+          {[...bodyPartDD].map((value) => <MenuItem key={value} value={value}>{value}</MenuItem>)}
         </Select>
       </FormControl>
     </Box>
-    
+
   );
 }
 
@@ -38,7 +35,7 @@ export default UserInput;
 
 
 
-// {/* <form>   
+// {/* <form>
 //             <div clasName="dropdown-container">
 //                 <select onChange={onChange} defaultValue = {filter.character}>
 //                        {options.map((option) => (
