@@ -4,6 +4,8 @@ import Header from "./component/Header";
 import UserInput from "./component/UserInput";
 import { Button, Container, Paper, Stack } from "@mui/material";
 import WorkoutCard from "./component/WorkoutCard";
+// import Pagination from "./component/Pagination";
+import MuiPagination from "./component/MuiPagination"
 
 function App() {
   // DD means DropDown
@@ -27,7 +29,7 @@ function App() {
     const options = {
       method: "GET",
       headers: {
-        "X-RapidAPI-Key": "1612d92675msh4d77137027a4557p148afdjsna32764f0c32f",
+        "X-RapidAPI-Key": "f2a63a18efmshf77b64b42f7d000p15e104jsn3c1b283238b1",
         "X-RapidAPI-Host": "exercisedb.p.rapidapi.com",
       },
     };
@@ -75,6 +77,8 @@ function App() {
         </Paper>
       </Container>
       <WorkoutCard workOutCard={workOutCard} />
+      {/* <Pagination itemsPerPage={3} workOutCard={workOutCard} /> */}
+      <MuiPagination />
     </div>
   );
 }

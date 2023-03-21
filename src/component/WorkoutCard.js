@@ -10,8 +10,12 @@ import Typography from "@mui/material/Typography";
 
 function WorkoutCard({ workOutCard }) {
   console.log('card data:', workOutCard)
+
+  const threeWorkouts = workOutCard.slice(0,3)
+  const nextThree = 
+
   return (
-    workOutCard.map((workout) => (
+    threeWorkouts.map((workout) => (
       <Card sx={{ maxWidth: 345 }} key={workout.id}>
         <CardMedia
           sx={{ height: 140 }}
