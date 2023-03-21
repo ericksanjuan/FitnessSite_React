@@ -7,26 +7,21 @@ import WorkoutCard from "./component/WorkoutCard";
 
 function App() {
   // DD means DropDown
-  
+
   const [bodyPartDD, setBodyPartDD] = useState(new Set()),
     [muscleTypeDD, setMuscleTypeDD] = useState(new Set()),
     [bodyPart, setBodyPart] = useState(''),
     [muscleType, setMuscleType] = useState(''),
     [workOuts, setWorkOuts] = useState([])
-  
+
   useEffect(() => {
     getExercises();
-    // getWorkOuts();
-    console.log('useeffect workout invocation')
-  }, []); 
-  
+  }, []);
 
   const handleClick = (event) => {
     event.preventDefault();
-    getWorkOuts(bodyPart,muscleType)
-}
-
-
+    getWorkOuts(bodyPart, muscleType)
+  }
 
   function getExercises() {
     const options = {
@@ -40,7 +35,7 @@ function App() {
     fetch("https://exercisedb.p.rapidapi.com/exercises", options)
       .then((response) => response.json())
       .then((response) => {
-      setWorkOuts(response)
+        setWorkOuts(response)
         for (let i = 0; i < response.length; i++) {
           let currentItem = response[i];
           bodyPartDD.add(currentItem.bodyPart);
@@ -48,44 +43,46 @@ function App() {
         }
         setBodyPartDD(new Set(bodyPartDD));
         setMuscleTypeDD(new Set(muscleTypeDD));
-      
+
       })
       .catch((err) => console.error(err));
   }
-  function getWorkOuts () {
+  function getWorkOuts(bodyPart, muscleType) {
 
-  
-  const options = {
-    method: "GET",
-    headers: {
-      "X-RapidAPI-Key": "1612d92675msh4d77137027a4557p148afdjsna32764f0c32f",
-      "X-RapidAPI-Host": "exercisedb.p.rapidapi.com",
-    },
-  };
+    setWorkOuts(workOuts.filter(exercise => exercise.bodyPart === bodyPart && exercise.target === muscleType));
+    console.log('new state after filter', workOuts);
 
-  
-  fetch(`https://exercisedb.p.rapidapi.com/exercises/bodyPart/${bodyPart}`, options)
-      .then((response) => response.json())
-      .then((response) => {
-      console.log('this is the data', response)
-      setWorkOuts(response) 
-      })
-    }
-  
+    // const options = {
+    //   method: "GET",
+    //   headers: {
+    //     "X-RapidAPI-Key": "1612d92675msh4d77137027a4557p148afdjsna32764f0c32f",
+    //     "X-RapidAPI-Host": "exercisedb.p.rapidapi.com",
+    //   },
+    // };
+
+
+    // fetch(`https://exercisedb.p.rapidapi.com/exercises/bodyPart/${bodyPart}`, options)
+    //     .then((response) => response.json())
+    //     .then((response) => {
+    //     console.log('this is the data', response)
+    //     setWorkOuts(response) 
+    //     })
+  }
+
   return (
     <div className='App'>
       <Header />
       <Container maxWidth="sm">
-        <Paper variant="outlined" sx={{padding: 1}}>
+        <Paper variant="outlined" sx={{ padding: 1 }}>
           <Stack spacing={1}>
-            <UserInput className="BP" bodyPartDD={bodyPartDD} setBodyPart={setBodyPart} bodyPart={bodyPart} label='Body Part'/>
-            <UserInput className="MT" bodyPartDD={muscleTypeDD} setBodyPart={setMuscleType} bodyPart={muscleType} label='Muscle Type'/>
+            <UserInput className="BP" bodyPartDD={bodyPartDD} setBodyPart={setBodyPart} bodyPart={bodyPart} label='Body Part' />
+            <UserInput className="MT" bodyPartDD={muscleTypeDD} setBodyPart={setMuscleType} bodyPart={muscleType} label='Muscle Type' />
             <Button variant="contained" onClick={handleClick}>Generate Workouts</Button>
           </Stack>
         </Paper>
       </Container>
       <WorkoutCard
-      workOuts={workOuts}/>
+        workOuts={workOuts} />
     </div>
   );
 }
