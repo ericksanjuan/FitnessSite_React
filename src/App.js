@@ -9,7 +9,7 @@ function App() {
   
   const [bodyPartDD, setBodyPartDD] = useState(new Set()),
     [muscleTypeDD, setMuscleTypeDD] = useState(new Set()),
-    [bodyPart, setBodyPart] = useState(""),
+    [bodyPart, setBodyPart] = useState(''),
     [muscleType, setMuscleType] = useState('')
 
   useEffect(() => {
