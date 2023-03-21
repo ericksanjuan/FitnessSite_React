@@ -5,28 +5,17 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 
-function UserInput({bodyPartDD, setBodyParts, bodyPart}) {
+function UserInput({bodyPartDD, setBodyPart, bodyPart, label}) {
   
 
   const handleChange = (event) => {
-    setBodyParts(event.target.value);
+    setBodyPart(event.target.value);
   };
-
-//   const renderMenuItems = bodyPartDD.map(item => {
-//     <MenuItem value={item.}
-//   })
-
-  function renderMenuItems (bodyPartDD) {
-    for (const entry of bodyPartDD) {
-        <MenuItem value={entry}>`${entry.stringify}`</MenuItem>
-      }
-      
-  }
 
   return (
     <Box sx={{ minWidth: 120 }}>
       <FormControl fullWidth>
-        <InputLabel id="bodyPart">Body Part</InputLabel>
+        <InputLabel id="bodyPart">{label}</InputLabel>
         <Select
           labelId="bodyPart"
           id="bodyPart"
@@ -34,11 +23,13 @@ function UserInput({bodyPartDD, setBodyParts, bodyPart}) {
           label="bodyPart"
           onChange={handleChange}
         >  
-         {renderMenuItems}
-          {/* <MenuItem value={bodyPartDD[0]}>Waist</MenuItem> */}
+         {/* {renderMenuItems}
+          <MenuItem value={bodyPartDD[0]}>Waist</MenuItem> */}
+          {[...bodyPartDD].map((value) => <MenuItem key={value} value={value}>{value}</MenuItem> )}
         </Select>
       </FormControl>
     </Box>
+    
   );
 }
 
