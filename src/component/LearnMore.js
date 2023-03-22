@@ -11,8 +11,6 @@ const params = new URLSearchParams([
   ]);
  function handleClick(){
     let link = `${baseUrl}${params.toString()}`
-    console.log(params.toString())
-    console.log(name)
     window.open(link, "_blank");
  }
   return (
