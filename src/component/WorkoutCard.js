@@ -6,6 +6,7 @@ import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import ShareBtn from "./ShareBtn";
+import LearnMore from "./LearnMore";
 
 function WorkoutCard({ workOutCard }) {
   const [page, setPage] = useState(1);
@@ -47,7 +48,7 @@ function WorkoutCard({ workOutCard }) {
           </CardContent>
           <CardActions>
             <ShareBtn />
-            <Button size="small">Learn More</Button>
+            <LearnMore name={workout.name}/>
           </CardActions>
         </Card>))}
         </Stack>
