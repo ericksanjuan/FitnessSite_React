@@ -27,7 +27,7 @@ function App() {
     const options = {
       method: "GET",
       headers: {
-        "X-RapidAPI-Key": "1612d92675msh4d77137027a4557p148afdjsna32764f0c32f",
+        "X-RapidAPI-Key": "f2a63a18efmshf77b64b42f7d000p15e104jsn3c1b283238b1",
         "X-RapidAPI-Host": "exercisedb.p.rapidapi.com",
       },
     };
@@ -74,7 +74,11 @@ function App() {
           </Stack>
         </Paper>
       </Container>
-      <WorkoutCard workOutCard={workOutCard} />
+      <Container>
+        <Stack direction="row" spacing={2} sx={{ padding: 2, justifyContent:"center" }}>
+          <WorkoutCard workOutCard={workOutCard} />
+        </Stack>
+      </Container>
     </div>
   );
 }
