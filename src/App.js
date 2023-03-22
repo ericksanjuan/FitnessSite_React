@@ -75,9 +75,9 @@ function App() {
         </Paper>
       </Container>
       <Container>
-        <Stack direction="row" spacing={2} sx={{ padding: 2, justifyContent:"center" }}>
+        
           <WorkoutCard workOutCard={workOutCard} />
-        </Stack>
+        
       </Container>
     </div>
   );
