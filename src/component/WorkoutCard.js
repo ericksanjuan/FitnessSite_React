@@ -1,10 +1,11 @@
 import React, {useState} from "react";
-import { Card } from "@mui/material";
+import { Card, Stack } from "@mui/material";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
+import ShareBtn from "./ShareBtn";
 
 
 function WorkoutCard({ workOutCard }) {
@@ -22,27 +23,29 @@ function WorkoutCard({ workOutCard }) {
   };
 
   return (
-    <>
+    <Stack>
+      <Stack direction="row" spacing={2} sx={{ padding: 2, justifyContent:"center" }}>
       {workOutCard.slice((page - 1) * workoutsPerPage, page * workoutsPerPage).map((workout) => (
         <Card sx={{ maxWidth: 345 }} key={workout.id}>
           <CardMedia
-            sx={{ height: 140 }}
-            image={workout.gifUrl}
+            sx={{ height: 200 }}
+            image={workout.gifUrl} 
             title={workout.name}
           />
           <CardContent>
-            <Typography gutterBottom variant="h5" component="div">
-              {workout.name}
+            <Typography gutterBottom variant="h5" component="div" sx={{fontFamily: "Arial, Helvetica, sans-serif"}}>
+              {workout.name.replace(/^./, workout.name[0].toUpperCase())}
             </Typography>
             <Typography variant="body2" color="text.secondary">
               {workout.bodyPart}
             </Typography>
           </CardContent>
           <CardActions>
-            <Button size="small">Share</Button>
+            <ShareBtn />
             <Button size="small">Learn More</Button>
           </CardActions>
         </Card>))}
+        </Stack>
         {totalWorkouts > workoutsPerPage && (
         <div>
           <Button onClick={handlePrevClick} disabled={page === 1}>
@@ -53,7 +56,7 @@ function WorkoutCard({ workOutCard }) {
           </Button>
         </div>
       )}
-    </>
+    </Stack>
   );
 }
 
