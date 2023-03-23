@@ -26,9 +26,9 @@ function WorkoutCard({ workOutCard }) {
     <Stack>
       <Stack direction="row" alignItems="center" justifyContent="space-between" sx={{padding: 3}}>
       {workOutCard.slice((page - 1) * workoutsPerPage, page * workoutsPerPage).map((workout) => (
-        <Card sx={{ maxWidth: 345, minWidth: 320}} key={workout.id}>
+        <Card sx={{ maxWidth: 350, minWidth: 350, minHeight: 600}} key={workout.id}>
           <CardMedia
-            sx={{ height: 350 }}
+            sx={{ height: 375 }}
             image={workout.gifUrl} 
             title={workout.name}
           />

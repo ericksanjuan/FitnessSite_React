@@ -14,7 +14,7 @@ const params = new URLSearchParams([
     window.open(link, "_blank");
  }
   return (
-    <Button size="small" onClick={handleClick}>Learn More</Button>
+    <Button size="medium" onClick={handleClick}>Learn More</Button>
   )
 
 }
