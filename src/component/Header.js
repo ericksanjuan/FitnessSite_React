@@ -1,6 +1,5 @@
 import { AppBar, Avatar, Container, IconButton, Stack, Toolbar, Typography } from "@mui/material";
 import React, { useContext } from "react";
-import "./Header.css";
 import FitnessCenterIcon from "@mui/icons-material/FitnessCenter";
 import { useTheme } from "@emotion/react";
 import { colorModeContext } from "./ModeContext";
@@ -18,10 +17,10 @@ function Header() {
         <Container maxWidth='lg'>
           <Stack direction='row' alignItems='center' justifyContent='space-between' flexGrow={1}>
             <FitnessCenterIcon sx={{ width: 32, height: 32 }} />
-            <Typography color={theme.palette.mode === 'dark' ? 'primary' : 'white' }>TEAM FIT: WORKOUT GENERATOR</Typography>
+            <Typography sx={{fontSize: "25px"}} color={theme.palette.mode === 'dark' ? 'primary' : 'white' }>TEAM FIT: WORKOUT GENERATOR</Typography>
             <Stack direction='row' alignItems='center'>
               <IconButton onClick={colorMode.toggleColorMode} color='inherit'>
-                {theme.palette.mode === "dark" ? <Brightness7Icon /> : <Brightness4Icon />}
+                {theme.palette.mode === "dark" ? <Brightness4Icon /> : <Brightness7Icon />}
               </IconButton>
               <Avatar alt="My Profile" src={avi}/>
             </Stack>

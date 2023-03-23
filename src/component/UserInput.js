@@ -22,6 +22,7 @@ function UserInput({ bodyPartDD, setBodyPart, bodyPart, label }) {
           label="bodyPart"
           onChange={handleChange}
         >
+          <MenuItem key='blank' value="">--</MenuItem>
           {[...bodyPartDD].map((value) => <MenuItem key={value} value={value}>{value}</MenuItem>)}
         </Select>
       </FormControl>

@@ -26,14 +26,14 @@ function WorkoutCard({ workOutCard }) {
     <Stack>
       <Stack direction="row" alignItems="center" justifyContent="space-between" sx={{padding: 3}}>
       {workOutCard.slice((page - 1) * workoutsPerPage, page * workoutsPerPage).map((workout) => (
-        <Card sx={{ maxWidth: 345, minWidth: 320}} key={workout.id}>
+        <Card sx={{ maxWidth: 350, minWidth: 350, minHeight: 600}} key={workout.id}>
           <CardMedia
-            sx={{ height: 350 }}
+            sx={{ height: 375 }}
             image={workout.gifUrl} 
             title={workout.name}
           />
           <CardContent>
-            <Typography gutterBottom variant="h5" component="div" sx={{fontFamily: "Arial, Helvetica, sans-serif"}}>
+            <Typography gutterBottom variant="h5" component="div" sx={{fontFamily: "Arial, Helvetica, sans-serif", minHeight: "63px"}}>
               {workout.name.replace(/^./, workout.name[0].toUpperCase())}
             </Typography>
             <Typography variant="body2" color="text.secondary">
@@ -52,6 +52,8 @@ function WorkoutCard({ workOutCard }) {
           </CardActions>
         </Card>))}
         </Stack>
+        {totalWorkouts !== 0 ?
+        <Typography>Page: {page} of {Math.ceil(totalWorkouts / 3)}</Typography>:""}
         {totalWorkouts > workoutsPerPage && (
         <div>
           <Button onClick={handlePrevClick} disabled={page === 1}>
