@@ -33,6 +33,7 @@ function App() {
       method: "GET",
       headers: {
         "X-RapidAPI-Key": "f2a63a18efmshf77b64b42f7d000p15e104jsn3c1b283238b1",
+        // "X-RapidAPI-Key": "a95449129cmsh849d2a0cc9c7a35p19dbb7jsneb7a0c766332",
         "X-RapidAPI-Host": "exercisedb.p.rapidapi.com",
       },
     };

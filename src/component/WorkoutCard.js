@@ -52,6 +52,8 @@ function WorkoutCard({ workOutCard }) {
           </CardActions>
         </Card>))}
         </Stack>
+        {totalWorkouts !== 0 ?
+        <Typography>Page: {page} of {Math.ceil(totalWorkouts / 3)}</Typography>:""}
         {totalWorkouts > workoutsPerPage && (
         <div>
           <Button onClick={handlePrevClick} disabled={page === 1}>
