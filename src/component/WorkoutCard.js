@@ -33,7 +33,7 @@ function WorkoutCard({ workOutCard }) {
             title={workout.name}
           />
           <CardContent>
-            <Typography gutterBottom variant="h5" component="div" sx={{fontFamily: "Arial, Helvetica, sans-serif"}}>
+            <Typography gutterBottom variant="h5" component="div" sx={{fontFamily: "Arial, Helvetica, sans-serif", minHeight: "63px"}}>
               {workout.name.replace(/^./, workout.name[0].toUpperCase())}
             </Typography>
             <Typography variant="body2" color="text.secondary">
