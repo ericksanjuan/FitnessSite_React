@@ -24,7 +24,7 @@ function WorkoutCard({ workOutCard }) {
 
   return (
     <Stack>
-      <Stack direction="row" spacing={2} sx={{ padding: 2, justifyContent:"center" }}>
+      <Stack direction="row" alignItems="center" justifyContent="space-between" sx={{padding: 3}}>
       {workOutCard.slice((page - 1) * workoutsPerPage, page * workoutsPerPage).map((workout) => (
         <Card sx={{ maxWidth: 345, minWidth: 320}} key={workout.id}>
           <CardMedia
