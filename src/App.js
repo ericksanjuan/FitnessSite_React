@@ -2,8 +2,11 @@ import { useEffect, useState } from "react";
 import "./App.css";
 import Header from "./component/Header";
 import UserInput from "./component/UserInput";
-import { Button, Container, Paper, Stack } from "@mui/material";
+import { Box, Button, Container, Paper, Stack } from "@mui/material";
 import WorkoutCard from "./component/WorkoutCard";
+import {ColorModeProvider} from "./component/ModeContext"
+
+
 
 function App() {
   // DD means DropDown
@@ -64,8 +67,10 @@ function App() {
   }
 
   return (
+    <ColorModeProvider>
     <div className='App'>
       <Header />
+      <Box m={2}/>
       <Container maxWidth="sm">
         <Paper variant="outlined" sx={{ padding: 1 }}>
           <Stack spacing={1}>
@@ -76,11 +81,10 @@ function App() {
         </Paper>
       </Container>
       <Container>
-        
-          <WorkoutCard workOutCard={workOutCard} />
-        
+        <WorkoutCard workOutCard={workOutCard} />     
       </Container>
     </div>
+    </ColorModeProvider>
   );
 }
 
