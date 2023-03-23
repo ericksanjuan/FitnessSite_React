@@ -15,7 +15,9 @@ function App() {
     [bodyPart, setBodyPart] = useState(''),
     [muscleType, setMuscleType] = useState(''),
     [workOuts, setWorkOuts] = useState([]),
-    [workOutCard, setWorkOutCard] = useState([])
+    [workOutCard, setWorkOutCard] = useState([]),
+    [equipmentDD, setEquipmentDD] = useState(new Set()),
+    [equipment, setEquipment] = useState('')
 
   useEffect(() => {
     getExercises();
@@ -23,7 +25,7 @@ function App() {
 
   const handleClick = (event) => {
     event.preventDefault();
-    getWorkOuts(bodyPart, muscleType)
+    getWorkOuts(bodyPart, muscleType, equipment)
   }
 
   function getExercises() {
@@ -44,23 +46,24 @@ function App() {
           let currentItem = response[i];
           bodyPartDD.add(currentItem.bodyPart);
           muscleTypeDD.add(currentItem.target);
+          equipmentDD.add(currentItem.equipment);
         }
         setBodyPartDD(new Set(bodyPartDD));
         setMuscleTypeDD(new Set(muscleTypeDD));
-
+        setEquipmentDD(new Set(equipmentDD));
       })
       .catch((err) => console.error(err));
   }
-  function getWorkOuts(bodyPart, muscleType) {
+  function getWorkOuts(bodyPart, muscleType, equipment) {
     const filteredWorkOuts = workOuts.filter(
-      exercise => exercise.bodyPart === bodyPart && exercise.target === muscleType
+      exercise => exercise.bodyPart === bodyPart && exercise.target === muscleType && exercise.equipment === equipment
     );
     if (filteredWorkOuts.length > 0) {
       setWorkOutCard(filteredWorkOuts);
     } else {
       setWorkOutCard(
         workOuts.filter(
-          exercise => exercise.bodyPart === bodyPart || exercise.target === muscleType
+          exercise => exercise.bodyPart === bodyPart || exercise.target === muscleType || exercise.equipment === equipment
         )
       );
     }
@@ -76,6 +79,7 @@ function App() {
           <Stack spacing={1}>
             <UserInput className="BP" bodyPartDD={bodyPartDD} setBodyPart={setBodyPart} bodyPart={bodyPart} label='Body Part' />
             <UserInput className="MT" bodyPartDD={muscleTypeDD} setBodyPart={setMuscleType} bodyPart={muscleType} label='Muscle Type' />
+            <UserInput className="EQ" bodyPartDD={equipmentDD} setBodyPart={setEquipment} bodyPart={equipment} label='Equipment' />
             <Button variant="contained" onClick={handleClick}>Generate Workouts</Button>
           </Stack>
         </Paper>
