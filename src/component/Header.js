@@ -6,6 +6,7 @@ import { useTheme } from "@emotion/react";
 import { colorModeContext } from "./ModeContext";
 import Brightness4Icon from '@mui/icons-material/Brightness4';
 import Brightness7Icon from '@mui/icons-material/Brightness7';
+import avi from "../images/avi.jpg"
 
 function Header() {
     const theme = useTheme()
@@ -22,7 +23,7 @@ function Header() {
               <IconButton onClick={colorMode.toggleColorMode} color='inherit'>
                 {theme.palette.mode === "dark" ? <Brightness7Icon /> : <Brightness4Icon />}
               </IconButton>
-              <Avatar />
+              <Avatar alt="My Profile" src={avi}/>
             </Stack>
           </Stack>
         </Container>
